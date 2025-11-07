@@ -36,7 +36,7 @@
     <script>
       async function tick(){
         try{
-          const r = await fetch("http://127.0.0.1:8000/state");
+         const r = await fetch("https://nirvaha-api.up.railway.app/state");
           const d = await r.json();
           const stateEl = document.getElementById("state");
           stateEl.textContent = d.state;
