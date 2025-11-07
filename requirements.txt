@@ -1,0 +1,11 @@
+opencv-python
+mediapipe
+numpy
+scipy
+fastapi
+uvicorn
+pydantic
+sounddevice
+pytest
+paho-mqtt
+pyyaml

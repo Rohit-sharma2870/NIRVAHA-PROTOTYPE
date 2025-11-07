@@ -1,0 +1,11 @@
+# Example config for thresholds and actions
+thresholds:
+  ear_drowsy: 0.20
+  gaze_off_deg: 0.18
+actions:
+  drowsy:
+    light: 80
+    tone: "beep3"
+  distracted:
+    light: 60
+    tone: "beep2"
