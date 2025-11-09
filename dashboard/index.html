@@ -1,55 +1,290 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NIRVĀHA Dashboard</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIRVĀHA Mockups</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 2rem; }
-      .card { border: 1px solid #ddd; border-radius: 12px; padding: 1rem; max-width: 640px; }
-      .row { display: flex; gap: 1rem; align-items: center; }
-      .badge { padding: 4px 10px; border-radius: 999px; background: #eee; }
-      .state-ATTENTIVE { background: #d7ffd9; }
-      .state-DROWSY { background: #ffe1e1; }
-      .state-DISTRACTED { background: #fff5cc; }
-      .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin-top: 1rem; }
-      .metric { background: #fafafa; border: 1px solid #eee; border-radius: 8px; padding: .5rem; }
-      small { color: #666; }
+        /* Using Inter font as a default */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Custom styles for the bar chart */
+        .bar {
+            animation: grow 1.5s ease-out;
+            transform-origin: bottom;
+        }
+        @keyframes grow {
+            0% { transform: scaleY(0); }
+            100% { transform: scaleY(1); }
+        }
+        /* Custom styles for the heatmap */
+        .heat-cell {
+            animation: fade-in 2s ease-in;
+        }
+        @keyframes fade-in {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
     </style>
-  </head>
-  <body>
-    <h1>NIRVĀHA — Driver State</h1>
-    <div class="card">
-      <div class="row">
-        <div>State:</div>
-        <div id="state" class="badge">--</div>
-        <div>Score:</div>
-        <div id="score" class="badge">--</div>
-        <div><small id="ts"></small></div>
-      </div>
-      <div class="metrics">
-        <div class="metric">EAR: <b id="ear">--</b></div>
-        <div class="metric">Blink: <b id="blink">--</b></div>
-        <div class="metric">Gaze Off: <b id="gaze">--</b></div>
-      </div>
+</head>
+<body class="bg-gray-100 min-h-screen p-4 md:p-8">
+
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">NIRVĀHA Visual Mockups</h1>
+
+    <!-- Changed to a 2-column layout for the remaining cards -->
+    <div class="container mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+        <!-- Card 1: In-Cabin Interaction Wireframe (Relabeled from 2) -->
+        <section class="bg-white p-6 rounded-2xl shadow-xl" role="region" aria-label="In-Cabin Interaction Wireframe">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">1. Output: In-Cabin Interaction</h2>
+            <p class="text-sm text-gray-600 mb-6">Real-time adaptive responses experienced by the driver.</p>
+
+            <!-- Mockup container -->
+            <div class="bg-gray-800 text-white p-6 rounded-lg relative overflow-hidden border-4 border-gray-700">
+                <h3 class="text-center font-medium mb-4">Car Cabin (Top View)</h3>
+                
+                <!-- Ambient Lighting Zones -->
+                <div class="absolute top-0 left-0 w-full h-full flex justify-between p-4 opacity-30" aria-hidden="true">
+                    <div class="w-1/4 h-full bg-blue-400 rounded-l-lg blur-xl"></div>
+                    <div class="w-1/4 h-full bg-blue-400 rounded-r-lg blur-xl"></div>
+                </div>
+                <div class="absolute top-2 left-4 text-xs text-blue-200 opacity-70">Ambient Lighting Zone</div>
+
+                <!-- Dashboard Display -->
+                <div class="bg-gray-900 border-2 border-gray-700 shadow-inner-lg rounded-xl p-4 w-full max-w-md mx-auto relative z-10 mb-8" role="status" aria-live="polite">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="font-semibold">Driver Status</h4>
+                        <span class="text-green-400 text-xs font-bold py-1 px-2 bg-green-900/80 rounded-full">ACTIVE</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Alertness Score:</span>
+                            <span class="text-green-300 font-bold">92%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Fatigue Level:</span>
+                            <span class="text-green-300">Low</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Next Rest Suggestion:</span>
+                            <span class="text-white">45 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Driver & Alerts -->
+                <div class="relative z-10 flex flex-col md:flex-row items-center justify-around space-y-4 md:space-y-0">
+                    <!-- Audio/Voice Notification -->
+                    <div class="text-center">
+                        <!-- Speaker Icon -->
+                        <svg class="w-10 h-10 mx-auto text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Audio Alert Icon"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.858 5.858a3 3 0 104.243 4.243m-1.06-1.06a3 3 0 00-4.243-4.243m1.06 1.06L9 9m-3.142-3.142A3 3 0 005.858 5.858m0 0A3 3 0 009 9m3 3a3 3 0 104.243 4.243m-1.06-1.06a3 3 0 00-4.243-4.243m1.06 1.06L15 15m-3.142-3.142A3 3 0 0012.001 12m0 0A3 3 0 0015 15"></path></svg>
+                        <p class="text-xs mt-2 text-purple-200">Audio/Voice Alerts</p>
+                    </div>
+
+                    <!-- Driver Seat -->
+                    <div class="text-center border-2 border-dashed border-blue-400 rounded-lg p-4 relative">
+                        <!-- Added rings for visual flair -->
+                        <span class="absolute inset-0 m-auto w-20 h-20 rounded-full bg-blue-500/10 animate-pulse" aria-hidden="true"></span>
+                        <span class="absolute inset-0 m-auto w-24 h-24 rounded-full bg-blue-500/5 animate-pulse delay-500" aria-hidden="true"></span>
+                        <!-- User Icon -->
+                        <svg class="w-12 h-12 mx-auto text-blue-300 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Driver Icon"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        <p class="text-sm mt-2 text-blue-200 relative z-10">Driver Seat</p>
+                        <p class="text-xs text-gray-400 relative z-10">(Monitored)</p>
+                    </div>
+
+                    <!-- Visual Alert -->
+                    <div class="text-center">
+                        <!-- Alert Icon -->
+                        <svg class="w-10 h-10 mx-auto text-red-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Visual Alert Icon"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        <p class="text-xs mt-2 text-red-300">Visual Alert (LED)</p>
+                    </div>
+                </div>
+
+                <!-- Camera -->
+                <div class="absolute top-6 right-6 text-center z-10">
+                    <!-- Camera Icon -->
+                    <svg class="w-6 h-6 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cabin Camera Icon"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <p class="text-xs text-gray-500">Cabin Camera</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Card 2: Mobile / Fleet Manager Dashboard Mockup (Relabeled from 3) -->
+        <section class="bg-white p-6 rounded-2xl shadow-xl" role="region" aria-label="Fleet Manager Dashboard Mockup">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">2. Output: Fleet Manager Dashboard</h2>
+            <p class="text-sm text-gray-600 mb-6">Data & analytics for fleet managers to track driver wellness.</p>
+
+            <!-- Mockup container -->
+            <div class="bg-gray-200 rounded-lg shadow-inner-lg border-4 border-gray-300 overflow-hidden">
+                <!-- Browser Chrome -->
+                <header class="bg-gray-800 p-3 flex items-center space-x-2">
+                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <div class="bg-gray-700 text-gray-300 text-sm rounded-md px-4 py-1 flex-grow ml-4" aria-label="Address Bar">
+                        https://fleet.nirvaha.ai/dashboard
+                    </div>
+                </header>
+
+                <!-- App Layout -->
+                <div class="flex h-[600px] bg-white">
+                    <!-- Left Panel: Driver List (Sidebar) -->
+                    <aside class="w-1/3 md:w-1/4 bg-gray-50 border-r border-gray-200 p-4 overflow-y-auto">
+                        <h3 class="text-lg font-semibold mb-4" id="driver-list-heading">Drivers</h3>
+                        <ul class="space-y-3" aria-labelledby="driver-list-heading">
+                            <!-- Changed name -->
+                            <li>
+                                <a href="#" class="block p-3 bg-blue-100 border-l-4 border-blue-500 rounded-r-md cursor-pointer" aria-selected="true">
+                                    <p class="font-semibold text-blue-800">Priya Sharma</p>
+                                    <p class="text-xs text-green-600">Online - Route 401</p>
+                                </a>
+                            </li>
+                            <!-- Changed name -->
+                            <li>
+                                <a href="#" class="block p-3 bg-white rounded-md hover:bg-gray-100 transition-colors duration-150 cursor-pointer">
+                                    <p class="font-semibold text-gray-700">Rohan Gupta</p>
+                                    <p class="text-xs text-gray-500">Offline</p>
+                                </a>
+                            </li>
+                            <!-- Changed name -->
+                            <li>
+                                <a href="#" class="block p-3 bg-white rounded-md hover:bg-gray-100 transition-colors duration-150 cursor-pointer">
+                                    <p class="font-semibold text-gray-700">Aarav Patel</p>
+                                    <p class="text-xs text-red-600">High Alert - HWY 10</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </aside>
+
+                    <!-- Main Panel: Analytics -->
+                    <main class="w-2/3 md:w-3/4 p-6 overflow-y-auto" role="main" aria-labelledby="dashboard-heading">
+                        <!-- Header -->
+                        <header class="flex justify-between items-center mb-6">
+                            <!-- Changed name -->
+                            <h2 id="dashboard-heading" class="text-2xl font-bold text-gray-800">Driver Wellness: Priya Sharma</h2>
+                            <div class="flex items-center space-x-4">
+                                <button class="relative" aria-label="View notifications (1 unread)">
+                                    <!-- Bell Icon -->
+                                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                                    <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center" aria-hidden="true">1</span>
+                                </button>
+                                <!-- User Profile Icon -->
+                                <!-- Changed placeholder text -->
+                                <img src="https://placehold.co/40x40/E2E8F0/4A5568?text=S" class="w-10 h-10 rounded-full" alt="Manager S">
+                            </div>
+                        </header>
+
+                        <!-- KPIs -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                            <div class="bg-gray-50 p-4 rounded-lg shadow-sm" role="status">
+                                <p class="text-sm text-gray-500">Real-time Wellness</p>
+                                <p class="text-3xl font-bold text-green-600">85/100</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                <p class="text-sm text-gray-500">Fatigue Trends (24h)</p>
+                                <p class="text-3xl font-bold text-yellow-600">+5%</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                <p class="text-sm text-gray-500">Alerts History (Today)</p>
+                                <p class="text-3xl font-bold text-red-600">3</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                <p class="text-sm text-gray-500">Breaks Taken</p>
+                                <p class="text-3xl font-bold text-blue-600">2 / 2</p>
+                            </div>
+                        </div>
+
+                        <!-- Charts -->
+                        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+                            <!-- Alert History Chart -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200" role="figure" aria-label="Alerts History Bar Chart, Last 7 Days">
+                                <h4 class="font-semibold mb-3">Alerts History (Last 7 Days)</h4>
+                                <div class="flex items-end justify-around h-40 space-x-2" aria-hidden="true">
+                                    <div class="text-center">
+                                        <div class="bar bg-red-400 w-8 rounded-t-md" style="height: 40%;" title="4 Alerts"></div>
+                                        <p class="text-xs mt-1">Mon</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="bar bg-yellow-400 w-8 rounded-t-md" style="height: 60%;" title="6 Alerts"></div>
+                                        <p class="text-xs mt-1">Tue</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="bar bg-red-400 w-8 rounded-t-md" style="height: 80%;" title="8 Alerts"></div>
+                                        <p class="text-xs mt-1">Wed</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="bar bg-green-400 w-8 rounded-t-md" style="height: 20%;" title="2 Alerts"></div>
+                                        <p class="text-xs mt-1">Thu</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="bar bg-yellow-400 w-8 rounded-t-md" style="height: 50%;" title="5 Alerts"></div>
+                                        <p class="text-xs mt-1">Fri</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="bar bg-green-400 w-8 rounded-t-md" style="height: 10%;" title="1 Alert"></div>
+                                        <p class="text-xs mt-1">Sat</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="bar bg-red-400 w-8 rounded-t-md" style="height: 90%;" title="9 Alerts"></div>
+                                        <p class="text-xs mt-1">Sun</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Attention Heatmap -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200" role="figure" aria-label="Driver Attention Heatmap, Last Journey">
+                                <h4 class="font-semibold mb-3">Driver Attention Heatmap (Last Journey)</h4>
+                                <p class="text-xs text-gray-500 mb-2">Red = Low Attention Zone</p>
+                                <div class="grid grid-cols-8 gap-1 h-40" aria-hidden="true">
+                                    <div class="heat-cell bg-green-500 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-600 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-500 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-400 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-500 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-600 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-500 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-400 rounded-sm" title="High Attention"></div>
+                                    
+                                    <div class="heat-cell bg-green-600 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-500 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-yellow-400 rounded-sm" style="animation-delay: 0.2s" title="Medium Attention"></div>
+                                    <div class="heat-cell bg-yellow-500 rounded-sm" style="animation-delay: 0.3s" title="Medium Attention"></div>
+                                    <div class="heat-cell bg-red-500 rounded-sm" style="animation-delay: 0.4s" title="Low Attention"></div>
+                                    <div class="heat-cell bg-yellow-500 rounded-sm" style="animation-delay: 0.5s" title="Medium Attention"></div>
+                                    <div class="heat-cell bg-yellow-400 rounded-sm" style="animation-delay: 0.6s" title="Medium Attention"></div>
+                                    <div class="heat-cell bg-green-500 rounded-sm" title="High Attention"></div>
+
+                                    <div class="heat-cell bg-green-500 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-400 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-500 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-600 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-500 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-400 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-500 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-600 rounded-sm" title="High Attention"></div>
+
+                                    <div class="heat-cell bg-green-400 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-yellow-400 rounded-sm" style="animation-delay: 0.7s" title="Medium Attention"></div>
+                                    <div class="heat-cell bg-yellow-500 rounded-sm" style="animation-delay: 0.8s" title="Medium Attention"></div>
+                                    <div class="heat-cell bg-green-400 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-500 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-600 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-500 rounded-sm" title="High Attention"></div>
+                                    <div class="heat-cell bg-green-400 rounded-sm" title="High Attention"></div>
+                                 </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </section>
+
     </div>
-    <script>
-      async function tick(){
-        try{
-         const r = await fetch("https://nirvaha-api.up.railway.app/state");
-          const d = await r.json();
-          const stateEl = document.getElementById("state");
-          stateEl.textContent = d.state;
-          stateEl.className = "badge state-" + d.state;
-          document.getElementById("score").textContent = d.score.toFixed(2);
-          document.getElementById("ear").textContent = (d.metrics.ear ?? 0).toFixed(2);
-          document.getElementById("blink").textContent = d.metrics.blink ?? 0;
-          document.getElementById("gaze").textContent = d.metrics.gaze_off ?? 0;
-          document.getElementById("ts").textContent = new Date(d.ts*1000).toLocaleTimeString();
-        }catch(e){ console.log(e); }
-        setTimeout(tick, 1000);
-      }
-      tick();
-    </script>
-  </body>
+
+</body>
 </html>
